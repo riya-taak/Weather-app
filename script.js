@@ -5,6 +5,11 @@ function fetchWeather(cityName) {
         .then((response) => {
             return response.json();
         }).then((data) => {
+             if (data.cod === "404") {        // ← Yeh add kiya
+                alert("City not found!");
+                return;
+            }
+
             console.log("Data : ", data);
 
             let tempKelvin = data.main.temp;
@@ -13,6 +18,7 @@ function fetchWeather(cityName) {
             document.getElementById("temp").innerText = tempCelsius.toFixed(2) + "°C";
             
             document.getElementById("city").innerText = data?.name;
+            document.getElementById("condition").innerText = data?.weather[0]?.description;
             document.getElementById("wind").innerText = data?.wind?.speed + " km/h";
             document.getElementById("humidity").innerText = data?.main?.humidity;
         })

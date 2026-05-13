@@ -16,6 +16,15 @@
     justify-content: center;
     height: 100vh;
 }
+
+.condition {
+    font-size: 18px;
+    text-transform: capitalize;
+    margin-top: 5px;
+    opacity: 0.85;
+}
+
+
 .cart{
     width: 90%;
     max-width: 470px;
