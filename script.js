@@ -5,12 +5,11 @@ function fetchWeather(cityName) {
         .then((response) => {
             return response.json();
         }).then((data) => {
-             if (data.cod === "404") {        // ← Yeh add kiya
+             if (data.cod === "404") {        
                 alert("City not found!");
                 return;
             }
 
-            console.log("Data : ", data);
 
             let tempKelvin = data.main.temp;
             let tempCelsius = tempKelvin - 273.15;
@@ -18,15 +17,18 @@ function fetchWeather(cityName) {
             document.getElementById("temp").innerText = tempCelsius.toFixed(2) + "°C";
             
             document.getElementById("city").innerText = data?.name;
-            document.getElementById("condition").innerText = data?.weather[0]?.description;
+            document.getElementById("condition").innerHTML = "<b>Condition : </b>" + data?.weather[0]?.description;
             document.getElementById("wind").innerText = data?.wind?.speed + " km/h";
             document.getElementById("humidity").innerText = data?.main?.humidity;
+        }).catch((error)=>{
+            console.info("Problem : "+error)
         })
 }
 
 let searchBtn = document.getElementById("searchBtn");
+console.log(searchBtn);
 searchBtn.addEventListener("click", () => {
     let city = document.getElementById("inputSearch").value;
-    console.log(city);
     fetchWeather(city);
 })
+
